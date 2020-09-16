@@ -3,6 +3,7 @@
 const router = require('express').Router();
 const User = require('../model/User');
 const Joi = require('@hapi/joi');
+const bcrypt = require('bcrypt');
 
 // validation
 const schema = Joi.object({
@@ -22,8 +23,14 @@ router.post('/register', async(req, res) => {
             email: req.body.email,
             password: req.body.password
         });
-        //res.json(result);
-        //Create new user
+
+        // Check if the user does't exist
+        const emailExist = await User.findOne({ email: req.body.email });
+
+        // if user exist, end the process and return message
+        if (emailExist) return res.send({ message: 'Email not available, choose another email please' });
+
+        //If user does not exist, Create new user
         const user = new User({
             name: req.body.name,
             email: req.body.email,
