@@ -13,7 +13,12 @@ const schema = Joi.object({
 });
 
 // Routes
-//Register Routes
+//Get all users
+router.get('/', async(req, res) => {
+        const allUsers = await User.find();
+        res.json({ allUsers });
+    })
+    //Register Routes
 router.post('/register', async(req, res) => {
 
     try {

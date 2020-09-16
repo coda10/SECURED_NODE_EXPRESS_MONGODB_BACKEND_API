@@ -1,0 +1,7 @@
+API: http://localhost:5000/api/user/
+
+END-POINTS:
+------------
+1) / --> method "GET"  --> Returns all registered users
+2) /register --> method "POST" --> Registers new user
+3) //login --> method "POST" --> Logs in a registered user
